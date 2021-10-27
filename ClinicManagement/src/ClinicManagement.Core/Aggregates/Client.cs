@@ -4,6 +4,7 @@ using PluralsightDdd.SharedKernel.Interfaces;
 
 namespace ClinicManagement.Core.Aggregates
 {
+  // CRUD simples, não foi modelado utilizando DDD
   public class Client : BaseEntity<int>, IAggregateRoot
   {
     public string FullName { get; set; }
