@@ -59,8 +59,13 @@ namespace FrontDesk.Core.ScheduleAggregate
       }
 
       MarkConflictingAppointments();
+<<<<<<< HEAD
 
       Events.Add(new AppointmentDeletedEvent(appointment));
+=======
+      var appointmentDeletedEvent = new AppointmentDeletedEvent(appointment);
+      Events.Add(appointmentDeletedEvent);
+>>>>>>> 38e562d43da9756528f7e09d1265a0c6648ed72b
     }
 
 

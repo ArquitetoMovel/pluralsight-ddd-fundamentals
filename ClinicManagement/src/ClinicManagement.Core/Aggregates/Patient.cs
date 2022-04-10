@@ -3,6 +3,8 @@ using PluralsightDdd.SharedKernel;
 
 namespace ClinicManagement.Core.Aggregates
 {
+  // CRUD SIMPLES, não está sendo utilizado DDD /
+  // não foi modelado utilizando DDD
   public class Patient : BaseEntity<int>
   {
     public int ClientId { get; set; }

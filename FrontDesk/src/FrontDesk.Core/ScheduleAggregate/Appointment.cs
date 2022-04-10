@@ -47,10 +47,18 @@ namespace FrontDesk.Core.ScheduleAggregate
 
     public void UpdateRoom(int newRoomId)
     {
+      UpdateRoom(newRoomId, null);
+    }
+
+    public void UpdateRoom(int newRoomId,
+      Action scheduleHandler)
+    {
       Guard.Against.NegativeOrZero(newRoomId, nameof(newRoomId));
       if (newRoomId == RoomId) return;
 
       RoomId = newRoomId;
+
+      scheduleHandler?.Invoke();
 
       var appointmentUpdatedEvent = new AppointmentUpdatedEvent(this);
       Events.Add(appointmentUpdatedEvent);
@@ -64,10 +72,18 @@ namespace FrontDesk.Core.ScheduleAggregate
     
     public void UpdateDoctor(int newDoctorId)
     {
+      UpdateDoctor(newDoctorId, null);
+    }
+
+    public void UpdateDoctor(int newDoctorId, 
+      Action scheduleHandler)
+    {
       Guard.Against.NegativeOrZero(newDoctorId, nameof(newDoctorId));
       if (newDoctorId == DoctorId) return;
 
       DoctorId = newDoctorId;
+
+      scheduleHandler?.Invoke();
 
       var appointmentUpdatedEvent = new AppointmentUpdatedEvent(this);
       Events.Add(appointmentUpdatedEvent);

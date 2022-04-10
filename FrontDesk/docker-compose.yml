@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+       - 5672:5672
+       - 15672:15672
+       - 25676:25676
+  frontdesk.api:
+    image: ${DOCKER_REGISTRY-}frontdeskapi
+    build:
+      context: .
+      dockerfile: src/FrontDesk.Api/Dockerfile
+    depends_on:
+     - rabbitmq

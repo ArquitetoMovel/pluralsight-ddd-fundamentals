@@ -7,7 +7,7 @@ namespace PluralsightDdd.SharedKernel
   public class DateTimeRange : ValueObject
   {
     public DateTime Start { get; private set; }
-    public DateTime End { get; private set; }
+    public DateTime End { get; } // property read only since C#8
 
     public DateTimeRange(DateTime start, DateTime end)
     {

@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "frontdesk.api",
+      "composeLaunchUrl": "{Scheme}://localhost:{ServicePort}/{Scheme}://{ServiceHost}:{ServicePort}",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "frontdesk.api": "StartDebugging"
+      }
+    }
+  }
+}
