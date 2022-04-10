@@ -51,8 +51,7 @@ namespace FrontDesk.Core.ScheduleAggregate
     {
       Guard.Against.Null(appointment, nameof(appointment));
       var appointmentToDelete = _appointments
-                                .Where(a => a.Id == appointment.Id)
-                                .FirstOrDefault();
+        .FirstOrDefault(a => a.Id == appointment.Id);
 
       if (appointmentToDelete != null)
       {
@@ -61,7 +60,7 @@ namespace FrontDesk.Core.ScheduleAggregate
 
       MarkConflictingAppointments();
 
-      // TODO: Add appointment deleted event and show delete message in Blazor client app
+      Events.Add(new AppointmentDeletedEvent(appointment));
     }
 
 
@@ -75,11 +74,10 @@ namespace FrontDesk.Core.ScheduleAggregate
         var potentiallyConflictingAppointments = _appointments
             .Where(a => a.PatientId == appointment.PatientId &&
             a.TimeRange.Overlaps(appointment.TimeRange) &&
-            a != appointment)
+            a != appointment &&
+            a.RoomId == appointment.RoomId &&
+            a.DoctorId == appointment.DoctorId)
             .ToList();
-
-        // TODO: Add a rule to mark overlapping appointments in same room as conflicting
-        // TODO: Add a rule to mark same doctor with overlapping appointments as conflicting
 
         potentiallyConflictingAppointments.ForEach(a => a.IsPotentiallyConflicting = true);
 
@@ -92,7 +90,6 @@ namespace FrontDesk.Core.ScheduleAggregate
     /// </summary>
     public void AppointmentUpdatedHandler()
     {
-      // TODO: Add ScheduleHandler calls to UpdateDoctor, UpdateRoom to complete additional rules described in MarkConflictingAppointments
       MarkConflictingAppointments();
     }
   }

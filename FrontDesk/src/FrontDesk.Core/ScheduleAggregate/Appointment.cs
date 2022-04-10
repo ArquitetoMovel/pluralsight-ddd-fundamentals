@@ -56,6 +56,12 @@ namespace FrontDesk.Core.ScheduleAggregate
       Events.Add(appointmentUpdatedEvent);
     }
 
+    public void UpdateRoom(int newRoomId, Action updateScheduleHandler)
+    {
+      updateScheduleHandler?.Invoke();
+      UpdateRoom(newRoomId);
+    }
+    
     public void UpdateDoctor(int newDoctorId)
     {
       Guard.Against.NegativeOrZero(newDoctorId, nameof(newDoctorId));
@@ -65,6 +71,13 @@ namespace FrontDesk.Core.ScheduleAggregate
 
       var appointmentUpdatedEvent = new AppointmentUpdatedEvent(this);
       Events.Add(appointmentUpdatedEvent);
+    }
+
+
+    public void UpdateDoctor(int newDoctorId, Action updateScheduleHandler)
+    {
+     updateScheduleHandler?.Invoke();
+     UpdateDoctor(newDoctorId);
     }
 
     public void UpdateStartTime(DateTimeOffset newStartTime,
@@ -90,6 +103,12 @@ namespace FrontDesk.Core.ScheduleAggregate
       Events.Add(appointmentUpdatedEvent);
     }
 
+    public void UpdateTitle(string newTitle, Action scheduleHandler)
+    {
+      scheduleHandler?.Invoke();
+      UpdateTitle(newTitle);
+    }
+    
     public void UpdateAppointmentType(AppointmentType appointmentType,
       Action scheduleHandler)
     {

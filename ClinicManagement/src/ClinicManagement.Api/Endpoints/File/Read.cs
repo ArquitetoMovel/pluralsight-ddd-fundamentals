@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Ardalis.ApiEndpoints;
 using BlazorShared.Models;
-using BlazorShared.Models.Doctor;
+//using BlazorShared.Models.Doctor;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SixLabors.ImageSharp;
@@ -66,7 +66,7 @@ namespace ClinicManagement.Api.FileEndpoints
         FileName = fileName
       };
 
-      return Ok(response);
+       return Ok(response);
     }
   }
 }

@@ -1,0 +1,10 @@
+POST http://localhost:5106/api/rooms HTTP/2.1
+content-type: application/json
+
+{
+
+    "name": "Cirurgia XPTO"
+}
+
+###
+

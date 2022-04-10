@@ -19,7 +19,5 @@ services:
     build:
       context: .
       dockerfile: src/ClinicManagement.Api/Dockerfile
-    ports:
-      - "443:443"
     depends_on:
       - clinicmanagement-db
