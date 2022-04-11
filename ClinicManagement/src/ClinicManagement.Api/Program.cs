@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 namespace ClinicManagement.Api
 {
@@ -12,8 +14,29 @@ namespace ClinicManagement.Api
   {
     public static async System.Threading.Tasks.Task Main(string[] args)
     {
-      var host = CreateHostBuilder(args)
+      var builder = CreateHostBuilder(args);
+      
+      var serviceName = "ClinicManagement.Api";
+      var serviceVersion = "1.0.0";
+      
+      builder.ConfigureServices(service =>
+      {
+        service.AddOpenTelemetryTracing(b =>
+        {
+          b
+            .AddConsoleExporter()
+            .AddSource(serviceName)
+            .SetResourceBuilder(
+              ResourceBuilder.CreateDefault()
+                .AddService(serviceName: serviceName, serviceVersion: serviceVersion))
+            .AddHttpClientInstrumentation()
+            .AddAspNetCoreInstrumentation();
+        });
+      });
+
+      var host = builder
                   .Build();
+      
 
       using (var scope = host.Services.CreateScope())
       {
@@ -35,13 +58,15 @@ namespace ClinicManagement.Api
 
       host.Run();
     }
+   
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
           .UseServiceProviderFactory(new AutofacServiceProviderFactory())
           .ConfigureWebHostDefaults(webBuilder =>
           {
             webBuilder.UseStartup<Startup>();
           });
+      
   }
 }

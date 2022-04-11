@@ -47,6 +47,12 @@
 	</PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
 	<PackageReference Include="MediatR" Version="9.0.0" />
+	<PackageReference Include="OpenTelemetry" Version="1.2.0-rc4" />
+	<PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.2.0-rc4" />
+	<PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.0.0-rc9.1" />
+	<PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.0.0-rc9.1" />
+	<PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.0.0-rc9.1" />
+	<PackageReference Include="OpenTelemetry.Instrumentation.SqlClient" Version="1.0.0-rc9.1" />
 	<PackageReference Include="PluralsightDdd.SharedKernel" Version="1.1.5" />
 	<PackageReference Include="RabbitMQ.Client" Version="6.2.1" />
 	<PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
