@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
 
@@ -32,6 +33,17 @@ namespace ClinicManagement.Api
             .AddHttpClientInstrumentation()
             .AddAspNetCoreInstrumentation();
         });
+        service.AddOpenTelemetryMetrics(m =>
+        {
+          m
+            .AddPrometheusExporter(options =>
+            {
+              options.StartHttpListener = true;
+              // Use your endpoint and port here
+              options.HttpListenerPrefixes = new string[] {$"http://localhost:{9090}/"};
+              options.ScrapeResponseCacheDurationMilliseconds = 0;
+            });
+          });
       });
 
       var host = builder

@@ -9,6 +9,11 @@ services:
       ACCEPT_EULA: '1'
     ports:
       - "1433:1433"
+  prometheus-monitor:
+    image: ubuntu/prometheus
+    container_name: ddd.clinicmanagement-mon
+    ports:
+      - "30090:9090"
   #clinicmanagementblazor:
    #image: ${DOCKER_REGISTRY-}clinicmanagementblazor
    #build:
