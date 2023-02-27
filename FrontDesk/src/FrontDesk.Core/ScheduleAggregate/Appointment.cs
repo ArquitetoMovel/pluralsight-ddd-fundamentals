@@ -64,11 +64,11 @@ namespace FrontDesk.Core.ScheduleAggregate
       Events.Add(appointmentUpdatedEvent);
     }
 
-    public void UpdateRoom(int newRoomId, Action updateScheduleHandler)
-    {
-      updateScheduleHandler?.Invoke();
-      UpdateRoom(newRoomId);
-    }
+   //public void UpdateRoom(int newRoomId, Action updateScheduleHandler)
+   //{
+   //  updateScheduleHandler?.Invoke();
+   //  UpdateRoom(newRoomId);
+   // }
     
     public void UpdateDoctor(int newDoctorId)
     {
@@ -90,11 +90,11 @@ namespace FrontDesk.Core.ScheduleAggregate
     }
 
 
-    public void UpdateDoctor(int newDoctorId, Action updateScheduleHandler)
-    {
-     updateScheduleHandler?.Invoke();
-     UpdateDoctor(newDoctorId);
-    }
+    //public void UpdateDoctor(int newDoctorId, Action updateScheduleHandler)
+    //{
+     //updateScheduleHandler?.Invoke();
+    // UpdateDoctor(newDoctorId);
+    //}
 
     public void UpdateStartTime(DateTimeOffset newStartTime,
       Action scheduleHandler)
